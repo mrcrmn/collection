@@ -1,6 +1,6 @@
 <?php
 
-namespace Nhance\Tests\Core;
+namespace mrcrmn\Collection\Tests;
 
 use PHPUnit\Framework\TestCase;
 use mrcrmn\Collection\Collection;

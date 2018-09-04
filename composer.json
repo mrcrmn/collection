@@ -1,8 +1,11 @@
 {
     "name": "mrcrmn/collection",
     "description": "An array object with a nice API",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "type": "library",
+    "require": {
+        "php": ">=5.6"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7.3"
     },
@@ -16,6 +19,11 @@
     "autoload": {
         "psr-4": {
             "mrcrmn\\Collection\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "mrcrmn\\Collection\\Test\\": "tests/"
         }
     }
 }
