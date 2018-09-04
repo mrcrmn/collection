@@ -1,0 +1,20 @@
+{
+    "name": "mrcrmn/collection",
+    "description": "An array object with a nice API",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^7.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mrcrmn",
+            "email": "marcoreimann@outlook.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "mrcrmn\\Collection\\": "src/"
+        }
+    }
+}
