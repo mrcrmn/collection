@@ -2,7 +2,7 @@
 
 namespace mrcrmn\Collection\Traits;
 
-trait Iterable
+trait CanBeIterated
 {
     /**
      * The current position of the iterator.

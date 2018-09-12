@@ -6,13 +6,13 @@ use Iterator;
 use Countable;
 use ArrayAccess;
 use JsonSerializable as JsonInterface;
-use mrcrmn\Collection\Traits\Iterable;
+use mrcrmn\Collection\Traits\CanBeIterated;
 use mrcrmn\Collection\Traits\ArrayAccessable;
 use mrcrmn\Collection\Traits\JsonSerializable;
 
 class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
 {
-    use ArrayAccessable, Iterable, JsonSerializable;
+    use ArrayAccessable, CanBeIterated, JsonSerializable;
 
     /**
      * The main array.
