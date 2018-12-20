@@ -82,6 +82,17 @@ class CollectionTest extends TestCase
         $this->assertNull($collection->get('not_set'));
     }
 
+    public function test_new_values_can_be_set()
+    {
+        $collection = new Collection();
+        $collection->set(1);
+        $collection->set('key', 'value');
+
+        $this->assertCount(2, $collection);
+        $this->assertEquals(1, $collection->get(0));
+        $this->assertEquals('value', $collection->get('key'));
+    }
+
     public function test_unsets_a_key()
     {
         $collection = new Collection(['foo' => 'bar']);
@@ -248,5 +259,24 @@ class CollectionTest extends TestCase
         $collection = $collection->sortDesc();
 
         $this->assertEquals(20, $collection[0]);
+        $this->assertEquals(9, $collection[1]);
+        $this->assertEquals(3, $collection[2]);
+        $this->assertEquals(1, $collection[3]);
+    }
+
+    public function test_it_can_execute_a_callback_if_a_given_boolean_is_true() {
+        $collection = new Collection([3, 9, 1, 20]);
+
+        $collection->when(true, function($collection) {
+            return $collection->set(25);
+        });
+
+        $this->assertCount(5, $collection);
+
+        $collection->when(false, function($collection) {
+            return $collection->set(25);
+        });
+
+        $this->assertCount(5, $collection);
     }
 }

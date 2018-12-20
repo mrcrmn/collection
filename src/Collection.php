@@ -199,13 +199,13 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
      * Calls the given function on each element of the array.
      *
      * @param Callable $callback
-     * @return static
+     * @return $this
      */
     public function map($callback)
     {
-        return new static(
-            array_map($callback, $this->array)
-        );
+        $this->array = array_map($callback, $this->array);
+
+        return $this;
     }
 
     /**
@@ -270,6 +270,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     public function chunk($size)
     {
         $chunked = array_chunk($this->array, $size);
+
         $this->array = array_map(function ($item) {
             return new static($item);
         }, $chunked);
@@ -318,15 +319,32 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     }
 
     /**
+     * Executes the given callback if the boolean is true.
+     *
+     * @param bool $boolean
+     * @param callable $callback
+     *
+     * @return $this
+     */
+    public function when($boolean, $callback)
+    {
+        if ($boolean) {
+            return $callback($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * Returns the keys of the array.
      *
      * @return static
      */
     public function keys()
     {
-        return new static(
-            array_keys($this->array)
-        );
+        $this->array = array_keys($this->array);
+
+        return $this;
     }
 
     /**
@@ -336,9 +354,9 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
      */
     public function values()
     {
-        return new self(
-            array_values($this->array)
-        );
+        $this->array = array_values($this->array);
+
+        return $this;
     }
 
     /**
