@@ -71,7 +71,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
      */
     public function __set($key, $value)
     {
-        $this->set($key, $value);
+        return $this->set($key, $value);
     }
 
     /**
@@ -139,7 +139,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         unset($this->array[$key]);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -167,11 +167,11 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
      *
      * @return $this
      */
-    public function reverse($preserve = false)
+    public function reverse($preserveKeys = false)
     {
-        $this->array = array_reverse($this->array, $preserve);
+        $this->array = array_reverse($this->array, $preserveKeys);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -205,7 +205,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         $this->array = array_map($callback, $this->array);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -220,7 +220,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
             is_int($key) ? $callback($value) : $callback($key, $value);
         }
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -258,7 +258,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
             $this->array = array_filter($this->array);
         }
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -275,7 +275,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
             return new static($item);
         }, $chunked);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -290,7 +290,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         $this->array = array_slice($this->array, $offset, $length, $preserveKeys);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -332,7 +332,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
             return $callback($this);
         }
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -344,7 +344,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         $this->array = array_keys($this->array);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -356,7 +356,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         $this->array = array_values($this->array);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -410,7 +410,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         sort($this->array);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -422,7 +422,7 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         rsort($this->array);
 
-        return $this;
+        return new static($this->array);
     }
 
     /**
@@ -435,6 +435,6 @@ class Collection implements ArrayAccess, Iterator, JsonInterface, Countable
     {
         uasort($this->array, $callback);
 
-        return $this;
+        return new static($this->array);
     }
 }
