@@ -279,4 +279,13 @@ class CollectionTest extends TestCase
 
         $this->assertCount(5, $collection);
     }
+
+    public function test_reduce_method()
+    {
+        $collection = new Collection([1, 2, 3, 4, 5]);
+
+        $this->assertEquals(120, $collection->reduce(function($carry, $number) {
+            return $carry *= $number;
+        }, 1));
+    }
 }
