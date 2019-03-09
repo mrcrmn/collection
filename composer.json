@@ -1,7 +1,7 @@
 {
     "name": "mrcrmn/collection",
     "description": "An array object with a nice API",
-    "version": "0.2.0",
+    "version": "0.3.1",
     "type": "library",
     "require": {
         "php": ">=5.6"
